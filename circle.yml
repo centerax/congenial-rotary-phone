@@ -10,7 +10,6 @@ test:
         PROVISIONING_PROFILE=
         -sdk=iphonesimulator
         -destination 'id=D56EBD40-B853-4D56-B482-D4C40E69A3FC'
-        -workspace testci.xcworkspace
         -scheme "testci"
         clean build test |
       tee $CIRCLE_ARTIFACTS/xcode_raw.log |
