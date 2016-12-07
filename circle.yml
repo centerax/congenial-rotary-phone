@@ -1,0 +1,17 @@
+machine:
+  xcode:
+    version: 8.1
+test:
+  override:
+    - set -o pipefail &&
+      xcodebuild
+        CODE_SIGNING_REQUIRED=NO
+        CODE_SIGN_IDENTITY=
+        PROVISIONING_PROFILE=
+        -sdk=iphonesimulator
+        -destination 'id=D56EBD40-B853-4D56-B482-D4C40E69A3FC'
+        -workspace testci.xcworkspace
+        -scheme "testci"
+        clean build test |
+      tee $CIRCLE_ARTIFACTS/xcode_raw.log |
+      xcpretty --color --report junit --output $CIRCLE_TEST_REPORTS/xcode/results.xml
